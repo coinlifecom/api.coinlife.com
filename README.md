@@ -42,6 +42,52 @@ Parameters without `?` is required
 }
 ```
 
+### `getGraph`
+Real-time date-value graph data
+
+`../getGraph/{crypto_currency}/{parameter}`
+
+**Posible values of parameters:**
+
+`crypto_currency` BTC, LTC, ETH, BCH, DASH ... all crypto currencies symbols you can get in [https://api.coinlife.com/public/getStats!](https://api.coinlife.com/public/getStats)
+
+`parameter` hashrate, marketcap, transactions_1h
+
+All parameters is required
+
+**JSON Response example**
+
+**GET** `https://api.coinlife.com/public/getGraph/BTC/transactions_1h`
+
+```
+{
+  "status": "ok",
+  "props": {
+    "value": "219.48K",
+    "name": "total transactions (24h)",
+    "percent_change": 22.87
+  },
+  "options": {
+    "x": {
+      "min": 1519727401,
+      "max": 1519810202
+    },
+    "y": {
+      "min": 8680,
+      "max": 9727
+    }
+  },
+  "graph": [{
+    "x": 1519727401,
+    "y": 8691
+  },
+  ...
+  ]
+}
+```
+
+
+
 ### `getStats`
 Current crypto currencies statistics
 
