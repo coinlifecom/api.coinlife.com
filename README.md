@@ -40,3 +40,50 @@ Parameters without `?` is required
     ...
   }
 }
+```
+
+### `getStats`
+Current crypto currencies statistics
+
+`../getStats`
+
+**No parameters:**
+
+**JSON Response example**
+
+**GET** `https://api.coinlife.com/public/getStats`
+
+```
+{
+  "status": "ok",
+  "stats": {
+    "BTC": {
+      "id": "151735",
+      "date": "2018-02-28 06:55:02",
+      "symbol": "BTC",
+      "symbol_hash": "4b9169eb3e07e0e885eb62f7bfc41a33",
+      "total": "16878023",
+      "price": "10914.24",
+      "marketcap": "184210714133",
+      "transactions_24h": "223838",
+      "transactions_1h": "9327",
+      "turnhover_24h": "967703",
+      "turnhover_1h": "40321",
+      "amount": "4.32",
+      "amount_median": "0.082",
+      "block_time": "505.00",
+      "total_blocks": "511283",
+      "total_blocks_24h": "170",
+      "total_blocks_1h": "7",
+      "block_reward": "12.81",
+      "block_reward_24h": "54.10",
+      "difficulty": "3007383866430",
+      "hashrate": "2.4459e19",
+      "mining_profit": "0.0000000000009715"
+    },
+    ...
+  }
+}
+```
+
+
