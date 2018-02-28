@@ -86,4 +86,51 @@ Current crypto currencies statistics
 }
 ```
 
+### `getMarketcap`
+
+Crypto currencies marketcap
+
+`../getMarketcap`
+
+**No parameters**
+
+**JSON Response example**
+
+**GET** `https://api.coinlife.com/public/getMarketcap`
+
+```
+{
+  "status": "ok",
+  "marketcap": {
+    "currencies": [{
+      "id": "bitcoin",
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "rank": "1",
+      "price_usd": "10727.7",
+      "price_btc": "1.0",
+      "24h_volume_usd": "7155650000.0",
+      "market_cap_usd": "181203189855",
+      "available_supply": "16891150.0",
+      "total_supply": "16891150.0",
+      "max_supply": "21000000.0",
+      "percent_change_1h": "-0.92",
+      "percent_change_24h": "0.58",
+      "percent_change_7d": "-3.75",
+      "last_updated": "1519807767"
+    },
+    ...
+    ],
+    "global": {
+      "total_market_cap_usd": 453012789938,
+      "total_24h_volume_usd": 18224909442,
+      "bitcoin_percentage_of_market_cap": 39.85,
+      "active_currencies": 912,
+      "active_assets": 611,
+      "active_markets": 8846,
+      "last_updated": 1519808069
+    }
+  }
+}
+```
 
