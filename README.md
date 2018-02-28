@@ -49,7 +49,7 @@ Real-time date-value graph data
 
 **Posible values of parameters:**
 
-`crypto_currency` BTC, LTC, ETH, BCH, DASH ... all crypto currencies symbols you can get in [https://api.coinlife.com/public/getStats!](https://api.coinlife.com/public/getStats)
+`crypto_currency` BTC, LTC, ETH, BCH, DASH ... all crypto currencies symbols you can get in [https://api.coinlife.com/public/getStats](https://api.coinlife.com/public/getStats)
 
 `parameter` hashrate, marketcap, transactions_1h
 
