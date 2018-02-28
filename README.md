@@ -47,7 +47,7 @@ Current crypto currencies statistics
 
 `../getStats`
 
-**No parameters:**
+**No parameters**
 
 **JSON Response example**
 
