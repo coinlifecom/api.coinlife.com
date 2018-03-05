@@ -180,3 +180,40 @@ Crypto currencies marketcap
 }
 ```
 
+### `getPools`
+Mining pools rating and statistics
+
+`../getPools/{interval?}`
+
+**Posible values of parameters:**
+
+`interval` 1D, 3D, 1W, 1M, 3M, 1Y, ALL `default = 1D`
+
+Parameters without `?` is required
+
+**JSON Response example**
+
+**GET** `https://api.coinlife.com/public/getPolls/1D`
+
+```
+{
+  "status": "ok",
+  "pools": {
+    "pools": [{
+      "n": "48",
+      "p": 0.29268292682927,
+      "name": "BTC.com",
+      "id": "55",
+      "hash_share": 7.0730604419984e+18,
+      "count": "48"
+    },
+    ...
+    ],
+  },
+  "history" : {
+    "BTC.com": ["0.0440","0.0426","0.0637","0.0767","0.0819","0.1173","0.1158","0.1142","0.1438","0.1710","0.2204","0.2598"],
+    "AntPool": ["0.1576","0.1654","0.1630","0.1673","0.2120","0.1825","0.1580","0.1922","0.1742","0.1788","0.1899","0.1536"],
+    ...
+  }
+}
+```
