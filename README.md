@@ -183,11 +183,13 @@ Crypto currencies marketcap
 ### `getPools`
 Mining pools rating and statistics
 
-`../getPools/{interval?}`
+`../getPools/{interval?}/{history_year?}`
 
 **Posible values of parameters:**
 
 `interval` 1D, 3D, 1W, 1M, 3M, 1Y, ALL `default = 1D`
+
+`history_year` 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, latest `default = latest`
 
 Parameters without `?` is required
 
