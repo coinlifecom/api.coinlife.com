@@ -1,221 +1,244 @@
 # api.coinlife.com
 Public REST API methods
 
-**URL** `https://api.coinlife.com/public/{method}/..`
+**URL** `https://api.coinlife.com/{method}...`
 
+## `posts`
+Get last N posts
 
-### `getTickers`
-Real-time exchanges crypto currencies tickers
+`../posts?_sort=createdAt:desc&_limit={limit}`
 
-`../getTickers/{exchange}/{currency}/{order_value?}/{order_type?}`
-
-**Posible values of parameters:**
-
-`exchange` poloniex, binance, bitstamp, bittrex, kraken, bitfinex
-
-`currency` BTC, USD, EUR, CNY, RUB, KZT, UAH, GEL
-
-`order_value` volume, price, change, name, symbol `default = volume`
-
-`order_type` desc, asc `default = desc`
-
-Parameters without `?` is required
+`limit` 0,1,2...N Limit the size of the returned posts.
 
 **JSON Response example**
-
-**GET** `https://api.coinlife.com/public/getTickers/kraken/BTC`
+### get last 10 posts
+**GET** `https://api.coinlife.com/posts?_sort=createdAt:desc&_limit=10`
 
 ```
-{
-  "status": "ok",
-  "tickers": {
-    "BTC_XDG": {
-      "change_tag": "down",
-      "change": "-3.39",
-      "name": "Dogecoin",
-      "last": "0.00000057",
-      "volume": "8635996.03",
-      "currency": "XDG"
-    },
+[
+  {
+    "_id": "5afd93e7c8efc34f391e5290",
+    "post_id": 4600,
+    "__v": 0,
+    "author": {"1": "Author Name" },
+    "categories": { "14": "News" },
+    "tags": {"18": "биткоин", "26": "криптовалюта", "28": "майнинг"},
+    "content": {},
+    "createdAt": "2018-05-17T14:38:31.763Z",
+    "date": "2018-05-17T17:37:07.000Z",
+    "date_gmt": "2018-05-17T14:37:07.000Z",
+    "excerpt": {},
+    "featured_media": {},
+    "format": "standard",
+    "guid": {},
+    "status": "publish",
     ...
-  }
-}
-```
-
-### `getGraph`
-Real-time date-value graph data
-
-`../getGraph/{crypto_currency}/{parameter}`
-
-**Posible values of parameters:**
-
-`crypto_currency` BTC, LTC, ETH, BCH, DASH ... all crypto currencies symbols you can get in [https://api.coinlife.com/public/getStats](https://api.coinlife.com/public/getStats)
-
-`parameter` hashrate, marketcap, transactions_1h
-
-All parameters is required
-
-**JSON Response example**
-
-**GET** `https://api.coinlife.com/public/getGraph/BTC/transactions_1h`
-
-```
-{
-  "status": "ok",
-  "props": {
-    "value": "219.48K",
-    "name": "total transactions (24h)",
-    "percent_change": 22.87
-  },
-  "options": {
-    "x": {
-      "min": 1519727401,
-      "max": 1519810202
-    },
-    "y": {
-      "min": 8680,
-      "max": 9727
-    }
-  },
-  "graph": [{
-    "x": 1519727401,
-    "y": 8691
   },
   ...
-  ]
-}
+]
 ```
 
+Get post by ID
+`../posts/{post_id}`
 
-
-### `getStats`
-Current crypto currencies statistics
-
-`../getStats`
-
-**No parameters**
+`post_id` 0,1,2...N Unique identifier for a particular post.
 
 **JSON Response example**
-
-**GET** `https://api.coinlife.com/public/getStats`
+### get a post with id 4600
+**GET** `https://api.coinlife.com/posts/4600`
 
 ```
 {
-  "status": "ok",
-  "stats": {
-    "BTC": {
-      "id": "151735",
-      "date": "2018-02-28 06:55:02",
-      "symbol": "BTC",
-      "symbol_hash": "4b9169eb3e07e0e885eb62f7bfc41a33",
-      "total": "16878023",
-      "price": "10914.24",
-      "marketcap": "184210714133",
-      "transactions_24h": "223838",
-      "transactions_1h": "9327",
-      "turnhover_24h": "967703",
-      "turnhover_1h": "40321",
-      "amount": "4.32",
-      "amount_median": "0.082",
-      "block_time": "505.00",
-      "total_blocks": "511283",
-      "total_blocks_24h": "170",
-      "total_blocks_1h": "7",
-      "block_reward": "12.81",
-      "block_reward_24h": "54.10",
-      "difficulty": "3007383866430",
-      "hashrate": "2.4459e19",
-      "mining_profit": "0.0000000000009715"
-    },
-    ...
-  }
+  "_id": "5afd93e7c8efc34f391e5290",
+  "post_id": 4600,
+  "__v": 0,
+  "author": {"1": "Author Name" },
+  "categories": { "14": "News" },
+  "tags": {"18": "биткоин", "26": "криптовалюта", "28": "майнинг"},
+  "content": {},
+  "createdAt": "2018-05-17T14:38:31.763Z",
+  "date": "2018-05-17T17:37:07.000Z",
+  "date_gmt": "2018-05-17T14:37:07.000Z",
+  "excerpt": {},
+  "featured_media": {},
+  "format": "standard",
+  "guid": {},
+  "status": "publish",
+  ...
 }
 ```
 
-### `getMarketcap`
+## `charts`
+get coins market data and chart
 
-Crypto currencies marketcap
-
-`../getMarketcap`
-
-**No parameters**
-
-**JSON Response example**
-
-**GET** `https://api.coinlife.com/public/getMarketcap`
-
-```
-{
-  "status": "ok",
-  "marketcap": {
-    "currencies": [{
-      "id": "bitcoin",
-      "name": "Bitcoin",
-      "symbol": "BTC",
-      "rank": "1",
-      "price_usd": "10727.7",
-      "price_btc": "1.0",
-      "24h_volume_usd": "7155650000.0",
-      "market_cap_usd": "181203189855",
-      "available_supply": "16891150.0",
-      "total_supply": "16891150.0",
-      "max_supply": "21000000.0",
-      "percent_change_1h": "-0.92",
-      "percent_change_24h": "0.58",
-      "percent_change_7d": "-3.75",
-      "last_updated": "1519807767"
-    },
-    ...
-    ],
-    "global": {
-      "total_market_cap_usd": 453012789938,
-      "total_24h_volume_usd": 18224909442,
-      "bitcoin_percentage_of_market_cap": 39.85,
-      "active_currencies": 912,
-      "active_assets": 611,
-      "active_markets": 8846,
-      "last_updated": 1519808069
-    }
-  }
-}
-```
-
-### `getPools`
-Mining pools rating and statistics
-
-`../getPools/{interval?}/{history_year?}`
+`../charts?createdAt_gte={date}&_sort=market_cap_usd:desc&_start={start}&_limit={limit}`
 
 **Posible values of parameters:**
 
-`interval` 1D, 3D, 1W, 1M, 3M, 1Y, ALL `default = 1D`
+`date` YYYY-MM-DD format
 
-`history_year` 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, latest `default = latest`
+`start` 0,1,2...N Skip a specific number of coins (especially useful for pagination).
 
-Parameters without `?` is required
+`limit` 0,1,2...N Limit the size of the returned results.
 
 **JSON Response example**
+#### Get top 10 cryptocoins with chart data
+**GET** `https://api.coinlife.com/charts?createdAt_gte=2018-05-17&_sort=market_cap_usd:desc&_limit=10`
 
-**GET** `https://api.coinlife.com/public/getPolls/1D`
+```
+[
+  {
+    "_id": "ethereum",
+    "name": "Ethereum",
+    "symbol": "ETH",
+    "market_cap_usd": 70423230791,
+    "price_usd": "707.817",
+    "percent_change_24h": 1.52,
+    "24h_volume_usd": 2251900000,
+    "available_supply": 99493557,
+    "data": [{
+      "price_usd": "751.736",
+      "createdAt": "2018-05-10T00:00:00.000Z"
+      },
+      {
+      "price_usd": "755.771",
+      "createdAt": "2018-05-10T01:00:00.000Z"
+      },
+      {
+      "price_usd": "758.647",
+      "createdAt": "2018-05-10T02:00:00.000Z"
+      }
+      ...
+    ]
+    ....
+  }
+  ....
+]
+```
+
+## `currencyrate`
+
+Using this query all quote values will be returned relative to the source currency you specified
+`../currencyrate/{source}`
+
+**Posible values of source parameter:**
+`source` USD, EUR, RUB... etc
+
+**JSON Response example**
+#### Get all quotes
+**GET** `https://api.coinlife.com/currencyrate/USD`
 
 ```
 {
-  "status": "ok",
-  "pools": {
-    "pools": [{
-      "n": "48",
-      "p": 0.29268292682927,
-      "name": "BTC.com",
-      "id": "55",
-      "hash_share": 7.0730604419984e+18,
-      "count": "48"
-    },
+  "_id": "5b0307c2c8efc34f3920e9df",
+  "source": "USD",
+  "__v": 0,
+  "createdAt": "2018-05-21T17:54:10.229Z",
+  "quotes": {
+    "USDAED": 3.672705,
+    "USDAFN": 71.099998,
+    "USDALL": 107.610001,
+    "USDAMD": 482.529999,
+    "USDANG": 1.787502,
+    "USDAOA": 233.524994,
+    "USDARS": 24.35695,
+    "USDAUD": 1.321017,
+    "USDAWG": 1.78,
+    "USDAZN": 1.699503,
+    "USDBAM": 1.6639,
     ...
-    ],
   },
-  "history" : {
-    "BTC.com": ["0.0440","0.0426","0.0637","0.0767","0.0819","0.1173","0.1158","0.1142","0.1438","0.1710","0.2204","0.2598"],
-    "AntPool": ["0.1576","0.1654","0.1630","0.1673","0.2120","0.1825","0.1580","0.1922","0.1742","0.1788","0.1899","0.1536"],
-    ...
-  }
+  "updatedAt": "2018-05-21T18:00:01.243Z"
 }
 ```
+
+Limit your API request to a set of specific currencies by attaching the quotes parameter followed by any available 3-letter currency codes (divided by commas) of your choice.
+`../currencyrate/{source}?quotes=EUR,GBP,RUB,AUD`
+
+**JSON Response example**
+#### Get specific quotes
+**GET** `https://api.coinlife.com/currencyrate/USD/?quotes=EUR,GBP,RUB,AUD`
+
+```
+{
+  "_id": "5b0307c2c8efc34f3920e9df",
+  "source": "USD",
+  "quotes": {
+    "USDEUR": 0.849295,
+    "USDGBP": 0.74537,
+    "USDRUB": 61.598202,
+    "USDAUD": 1.321017
+  },
+  "createdAt": "2018-05-21T17:54:10.229Z",
+  "updatedAt": "2018-05-21T18:00:01.243Z",
+}
+```
+
+
+## `calc`
+
+Get coins price, difficulty, reward for calculations data
+`../calc`
+
+**JSON Response example**
+#### Get coins calculations data 
+**GET** `https://api.coinlife.com/calc`
+
+```
+{
+  "BTC": {
+    "_id": "5b030b79c8efc34f3920ebce",
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "block_reward": "12.72",
+    "block_reward24": "12.686828440367",
+    "difficulty": "4143878474754",
+    "difficulty24": "4143878474754",
+    "price_btc": "1.0",
+    "price_usd": "8414.65",
+    "createdAt": "2018-05-21T18:10:01.143Z",
+    "updatedAt": "2018-05-21T18:10:01.143Z",
+  },
+  "BCH": {
+  }
+  ...
+}
+```
+
+
+## `calc/presets`
+
+Get all coins calc presets
+`../calc/presets`
+
+**JSON Response example**
+#### Get all presets 
+**GET** `https://api.coinlife.com/calc/presets`
+
+```
+[
+  {
+    "_id": "5b02ff7f019245423b496dc0",
+    "symbol": "BTC",
+    "hashrate": 13.5,
+    "hashrate_select": "TH/s",
+    "power_consump": 1323,
+    "power_price": 0.07,
+    "currency_selector": "USD",
+    "whattomine_coin_name": "Bitcoin",
+    "enable": true,
+    "createdAt": "2018-05-21T17:18:55.346Z",
+    "updatedAt": "2018-05-21T17:18:55.362Z",
+    "__v": 0,
+    "id": "5b02ff7f019245423b496dc0"
+  },
+  {
+    "_id": "5b02ffd2019245423b496dc1",
+    "symbol": "BCH",
+    ....
+  }
+  ...
+]
+```
+
+###### For more info read the Strapi filter concepts: https://strapi.io/documentation/guides/filters.html
